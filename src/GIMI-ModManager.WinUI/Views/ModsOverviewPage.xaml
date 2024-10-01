@@ -163,7 +163,7 @@
                         x:Name="GoToCharacterButton"
                         Grid.Column="1"
                         Click="GoToCharacterButton_OnClick"
-                        Content="Go to Character" />
+                        Content="前往角色页面" />
 
                 </Grid>
 
@@ -226,7 +226,7 @@
                     FontSize="28"
                     Style="{StaticResource TitleTextBlockStyle}"
                     TextTrimming="CharacterEllipsis"
-                    Text="Mods Overview" />
+                    Text="模组概览" />
 
 
                 <StackPanel
@@ -252,7 +252,7 @@
                     x:Name="SearchBox"
                     MinWidth="200"
                     VerticalAlignment="Center"
-                    PlaceholderText="Press Enter to search..."
+                    PlaceholderText="按下回车搜索模组..."
                     QuerySubmitted="SearchBox_OnQuerySubmitted" />
             </StackPanel>
 

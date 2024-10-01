@@ -39,7 +39,7 @@
 
                     <TextBlock
                         VerticalAlignment="Center"
-                        Text="Auto sync not enabled! Remember to manually reload 3Dmigoto config with the F10 key when doing changes"
+                        Text="自动同步未启用！请记得在修改时手动重新加载 3Dmigoto 配置(按 F10 键)"
                         Visibility="{x:Bind ViewModel.AutoSync3DMigotoConfigIsDisabled, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
 
                     <Button Click="ButtonBase_OnClick">
@@ -57,7 +57,7 @@
             <TextBlock
                 Grid.Column="0"
                 Style="{StaticResource TitleTextBlockStyle}"
-                Text="Mod Presets and Mod Preferences"
+                Text="模组预设和模组偏好"
                 TextWrapping="NoWrap" />
         </Grid>
 
@@ -79,16 +79,16 @@
                     <TextBox
                         MinWidth="345"
                         HorizontalAlignment="Left"
-                        Header="New Preset Name"
+                        Header="新模组预设名称"
                         IsEnabled="{x:Bind ViewModel.IsNotBusy, Mode=OneWay}"
                         Text="{x:Bind ViewModel.NewPresetNameInput, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <StackPanel
                         Margin="0,8"
                         Orientation="Horizontal"
                         Spacing="8">
-                        <Button Command="{x:Bind ViewModel.CreatePresetCommand}" Content="Save active mod preferences and create new preset" />
+                        <Button Command="{x:Bind ViewModel.CreatePresetCommand}" Content="保存当前模组设置并创建为预设" />
                         <CheckBox
-                            Content="Create as an empty preset"
+                            Content="创建为空白预设"
                             IsChecked="{x:Bind ViewModel.CreateEmptyPresetInput, Mode=TwoWay}"
                             IsEnabled="{x:Bind ViewModel.IsNotBusy, Mode=OneWay}"
                             ToolTipService.ToolTip="If checked, the new preset will be created without any mods enabled." />
@@ -110,12 +110,12 @@
                         Spacing="16">
                         <CheckBox
                             Command="{x:Bind ViewModel.ToggleAutoSyncCommand}"
-                            Content="Auto sync Mod Preferences when switching presets"
+                            Content="切换预设时自动同步模组偏好"
                             IsChecked="{x:Bind ViewModel.AutoSync3DMigotoConfig, Mode=OneWay}"
                             ToolTipService.ToolTip="If checked, then JASM will automatically sync preferences when creating presets and when switching between presets" />
                         <Button
                             Command="{x:Bind ViewModel.StartElevatorCommand}"
-                            Content="Start Elevator..."
+                            Content="启动 Elevator...(我也不知道这是什么)"
                             IsEnabled="{x:Bind ViewModel.ElevatorService.CanStartElevator, Mode=OneWay}" />
                     </StackPanel>
 
@@ -137,7 +137,7 @@
                             Visibility="{x:Bind ViewModel.ShowManualControls, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
 
                         <CheckBox
-                            Content="Show Manual controls"
+                            Content="显示手动设置(不清楚是什么意思)"
                             IsChecked="{x:Bind ViewModel.ShowManualControls, Mode=TwoWay}"
                             ToolTipService.ToolTip="If you'd like to manually control setting preferences instead of letting JASM with the Elevator handle it for you" />
 

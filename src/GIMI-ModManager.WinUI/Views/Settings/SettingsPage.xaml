@@ -137,13 +137,13 @@
                         <CheckBox
                             Command="{x:Bind ViewModel.WindowSizePositionToggleCommand}"
                             CommandParameter="size"
-                            Content="Remember window size"
+                            Content="记住窗口大小"
                             IsChecked="{x:Bind ViewModel.PersistWindowSize, Mode=OneWay}"
                             ToolTipService.ToolTip="If checked then the main window size is saved when JASM exits" />
                         <CheckBox
                             Command="{x:Bind ViewModel.WindowSizePositionToggleCommand}"
                             CommandParameter="position"
-                            Content="Remember window position"
+                            Content="记住窗口位置"
                             IsChecked="{x:Bind ViewModel.PersistWindowPosition, Mode=OneWay}"
                             ToolTipService.ToolTip="If checked then the main window position is saved when JASM exits" />
                     </StackPanel>
@@ -303,18 +303,18 @@
                         <Button
                             Margin="40,0,0,0"
                             Command="{x:Bind ViewModel.ReorganizeModsCommand}"
-                            Content="Reorganize Mods" />
+                            Content="重新组织模组" />
                         <Button
                             Margin="40,0,0,0"
                             Command="{x:Bind ViewModel.ShowCleanModsFolderDialogCommand}"
-                            Content="Clean Mods folder" />
+                            Content="清理mods文件夹" />
                     </StackPanel>
 
                     <StackPanel Margin="0,16,0,0" Orientation="Horizontal">
                         <Button
                             Margin="0,0,8,0"
                             Command="{x:Bind ViewModel.Reset3DmigotoPathCommand}"
-                            Content="Reset 3Dmigoto Exe Path">
+                            Content="重置 3Dmigoto exe路径">
                             <ToolTipService.ToolTip>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock TextWrapping="WrapWholeWords" Text="{x:Bind ViewModel.ThreeDMigtoProcessManager.ProcessPath, Mode=OneWay}" />
@@ -334,7 +334,7 @@
                     <StackPanel Margin="0,16,0,0" Orientation="Horizontal">
                         <CheckBox
                             Command="{x:Bind ViewModel.ToggleCharacterSkinsAsCharactersCommand}"
-                            Content="Treat Character Skins as separate characters"
+                            Content="将角色的皮肤视为独立角色"
                             IsChecked="{x:Bind ViewModel.CharacterAsSkinsCheckbox, Mode=TwoWay}" />
                     </StackPanel>
 
@@ -344,7 +344,7 @@
                             HorizontalAlignment="Left"
                             IsTextSelectionEnabled="True"
                             TextWrapping="WrapWholeWords"
-                            Text="When using JASM to download mods, it automatically caches the archives or zip files. You can specify a maximum limit in gigabytes for the cache directory, and JASM will keep the cache size under the limit when starting up." />
+                            Text="当使用 JASM 下载模组时，它会自动缓存存档或 zip 文件。您可以为缓存目录指定最大限制（以 GB 为单位），JASM 将在启动时保持缓存大小在此限制以下。" />
 
                         <StackPanel Orientation="Horizontal" Spacing="16">
 
@@ -359,7 +359,7 @@
 
 
                     <TextBlock IsTextSelectionEnabled="True">
-                        <Run Text="Current Size of Mod Cache for" />
+                        <Run Text="当前模组缓存大小为" />
                         <Run Text="{x:Bind ViewModel.SelectedGame, Mode=OneWay}" />
                         <Run Text=":" />
                         <Run Text="{x:Bind ViewModel.ModCacheSizeGB, Mode=OneWay}" />
@@ -468,6 +468,25 @@
                             Content="Ignore Current Update?"
                             Visibility="{x:Bind ViewModel.ShowNewVersionAvailable, Mode=OneWay, Converter={StaticResource BoolToVisibleConverter}}" />
                     </StackPanel>
+                    <TextBlock
+        Style="{ThemeResource SubtitleTextBlockStyle}"
+        Text="汉化信息"
+        l:Uids.Uid="Settings_LocalizationInfo" />
+    <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
+        <TextBlock
+            Style="{ThemeResource BodyTextBlockStyle}"
+            Text="汉化作者：究极"
+            l:Uids.Uid="Settings_LocalizationAuthor" />
+        <TextBlock
+            Style="{ThemeResource BodyTextBlockStyle}"
+            Text="本人并没有很细致的检查汉化内容，如果发现问题，请不要在意。"
+            l:Uids.Uid="Settings_LocalizationFeedback" />
+        <HyperlinkButton
+            Margin="{StaticResource SettingsPageHyperlinkButtonMargin}"
+            Content="联系汉化作者"
+            NavigateUri="none" />
+    </StackPanel>
+</StackPanel>
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>

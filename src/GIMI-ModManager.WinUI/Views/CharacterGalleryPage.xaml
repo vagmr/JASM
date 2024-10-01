@@ -118,7 +118,7 @@
                 <TextBlock
                     Margin="0,0,8,0"
                     VerticalAlignment="Center"
-                    Text="Sort by:"
+                    Text="排序方式:"
                     TextWrapping="WrapWholeWords" />
 
                 <ComboBox

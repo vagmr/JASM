@@ -206,7 +206,7 @@ public sealed partial class ShellPage : Page
 
                 var toolTip = new ToolTip
                 {
-                    Content = $"Double click to switch to {gameInfo.GameName}"
+                    Content = $"双击切换至 {gameInfo.GameName}"
                 };
 
                 ToolTipService.SetToolTip(navigationItem, toolTip);

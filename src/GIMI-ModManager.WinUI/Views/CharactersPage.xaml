@@ -144,7 +144,7 @@
                     Margin="0,0,8,0"
                     VerticalAlignment="Center"
                     TextWrapping="WrapWholeWords"
-                    Text="Sort by:" />
+                    Text="排序方式:" />
 
                 <ComboBox
                     x:Name="SortingComboBox"
@@ -218,7 +218,7 @@
                 CornerRadius="8"
                 Orientation="Horizontal">
                 <CommandBar DefaultLabelPosition="Right" IsOpen="False">
-                    <AppBarButton Label="Mod Presets">
+                    <AppBarButton Label="模组预设">
                         <AppBarButton.Icon>
                             <FontIcon Glyph="&#xEA41;" />
                         </AppBarButton.Icon>
@@ -226,7 +226,7 @@
                             <Flyout Placement="Bottom">
                                 <ScrollViewer Margin="-4">
                                     <StackPanel Spacing="8">
-                                        <TextBlock Text="Apply Preset:" />
+                                        <TextBlock Text="应用预设:" />
                                         <ItemsRepeater ItemsSource="{x:Bind ViewModel.ModPresets}">
                                             <ItemsRepeater.Layout>
                                                 <StackLayout Orientation="Vertical" Spacing="8" />
@@ -251,7 +251,7 @@
                             </Flyout>
                         </AppBarButton.Flyout>
                     </AppBarButton>
-                    <AppBarButton Icon="Filter" Label="Filters">
+                    <AppBarButton Icon="Filter" Label="筛选">
 
                         <AppBarButton.Flyout>
                             <Flyout>

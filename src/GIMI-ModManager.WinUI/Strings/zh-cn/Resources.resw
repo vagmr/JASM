@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppDisplayName" xml:space="preserve">
-    <value>JASM - Just Another Skin Manager</value>
+    <value>JASM - Just Another Skin Manager 汉化版 By 究极</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
-    <value>JASM - Just Another Skin Manager</value>
+    <value>JASM - Just Another Skin Manager 汉化版 By 究极</value>
   </data>
   <data name="Startup1.Text" xml:space="preserve">
     <value>作为首次设置的一部分，您需要选择原神模型导入器（GIMI）文件夹及其关联的模组文件夹。GIMI/3dmigoto文件夹包含3DMigoto Loader.exe和一个模组文件夹。如果您尚未设置GIMI，请立即执行此操作，请参见下面的链接。我发现大多数模组在Gamebanana上，但Nexusmods也有一些。</value>

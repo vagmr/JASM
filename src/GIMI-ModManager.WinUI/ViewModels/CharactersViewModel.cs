@@ -316,8 +316,11 @@ public partial class CharactersViewModel : ObservableRecipient, INavigationAware
         CategoryPageTitle =
             $"{category.DisplayName} {_localizer.GetLocalizedStringOrDefault("Overview", useUidAsDefaultValue: true)}";
         ModToggleText = $"Show only {category.DisplayNamePlural} with Mods";
+        ModToggleText = "只显示带有模组的角色";
         ModNotificationsToggleText = $"Show only {category.DisplayNamePlural} with Mod Notifications";
+        ModNotificationsToggleText = "只显示有模组更新通知的的角色";
         SearchBoxPlaceHolder = $"Search {category.DisplayNamePlural}...";
+        SearchBoxPlaceHolder = "搜索角色...";
 
 
         var characters = _gameService.GetModdableObjects(_category);
@@ -1141,7 +1144,7 @@ public sealed class Sorter
     }
 
 
-    public const string AlphabeticalSortName = "Alphabetical";
+    public const string AlphabeticalSortName = "字母顺序排序";
 
     // TODO: These can be a static property
     public static Sorter Alphabetical()
@@ -1157,7 +1160,7 @@ public sealed class Sorter
     }
 
 
-    public const string ReleaseDateSortName = "Release Date";
+    public const string ReleaseDateSortName = "发布日期";
 
     // TODO: IDateSupport interface
     public static Sorter ReleaseDate()
@@ -1174,7 +1177,7 @@ public sealed class Sorter
                 ));
     }
 
-    public const string RaritySortName = "Rarity";
+    public const string RaritySortName = "稀有度";
 
     public static Sorter Rarity()
     {
@@ -1190,7 +1193,7 @@ public sealed class Sorter
                 ));
     }
 
-    public const string ModCountSortName = "Mod Count";
+    public const string ModCountSortName = "Mod数量";
 
     public static Sorter ModCount()
     {
@@ -1207,7 +1210,7 @@ public sealed class Sorter
     }
 
 
-    public const string ModRecentlyAddedName = "Recently Added Mods";
+    public const string ModRecentlyAddedName = "最近添加的模组";
 
     public static Sorter ModRecentlyAdded()
     {
