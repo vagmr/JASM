@@ -82,7 +82,7 @@
     <value>游戏</value>
   </data>
   <data name="GameSelectorTitle.Text" xml:space="preserve">
-    <value>JASM 支持原神和崩坏星铁道</value>
+    <value>JASM 支持原神,星铁，鸣潮，绝区零</value>
   </data>
   <data name="LanguageSelectionSectionHeader.Text" xml:space="preserve">
     <value>语言</value>
@@ -96,6 +96,15 @@
   <data name="ModsFolderSelector.Title" xml:space="preserve">
     <value>修改文件夹</value>
   </data>
+  <data name="TranslatorNoteHeader.Text" xml:space="preserve">
+  <value>此版本由究极汉化</value>
+</data>
+<data name="TranslatorNoteContent.Text" xml:space="preserve">
+  <value>目前并未完成全部汉化工作，有需要汉化的部分或者翻译错误可以反馈</value>
+</data>
+<data name="TranslatorFeedbackLink.Content" xml:space="preserve">
+  <value>反馈翻译问题</value>
+</data>
   <data name="ModUpdateCheckerCheckBox.Content" xml:space="preserve">
     <value>自动检查修改更新</value>
   </data>

@@ -52,7 +52,7 @@ public sealed partial class PresetPage : Page
     {
         var dialog = new ContentDialog
         {
-            Title = "How presets work",
+            Title = "预设是如何工作的",
             CloseButtonText = "Close",
             DefaultButton = ContentDialogButton.Close,
             Content = new StackPanel
@@ -61,15 +61,15 @@ public sealed partial class PresetPage : Page
                 Children =
                 {
                     CreateTextBlock(
-                        "A Preset is a list of Mods to enable and their preferences. JASM reads and stores mod preferences in the mods themselves in the file .JASM_ModConfig.json"),
+                        "预设是一个包含启用模组(Mods)及其设置的列表。JASM 在模组文件 .JASM_ModConfig.json 中读取和存储模组首选项。"),
                     CreateTextBlock(
-                        "When you create a new preset JASM creates a list of all enabled mods and the preferences stored in them. So when you apply the preset later it will enable only those mods and apply the preferences stored in the preset"),
+                        "当你创建一个新的预设时，JASM 会创建一个已启用模组的列表，以及存储在这些模组中的设置。因此，当您稍后应用该预设时，它将只启用这些模组，并应用预设中存储的设置。"),
 
                     CreateTextBlock(
-                        "You can allow JASM to handle 3Dmigoto reloading by starting the Elevator and checking the Auto Sync checkbox. But you can also do it yourself by checking the Show Manual Controls checkbox and saving/loading preferences manually and refreshing 3Dmigoto with the F10 key."),
+                        "您可以让 JASM 处理 3Dmigoto 的重新加载，方法是启动 Elevator 并勾选 Auto Sync 复选框。但是，您也可以手动进行此操作，方法是勾选 Show Manual Controls 复选框，手动保存和加载首选项，然后使用 F10 键刷新 3Dmigoto。(译者表示Elevator它用于自动向游戏发送F10键以刷新模组)"),
 
                     CreateTextBlock(
-                        "It is possible to simply ignore the preset part of this page and only use the manual controls to persist mod preferences."
+                        "您也可以完全忽略此页面的预设部分，只使用手动控制来保存模组首选项."
                     )
                 }
             }

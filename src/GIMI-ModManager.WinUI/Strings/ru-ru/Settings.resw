@@ -163,6 +163,15 @@
 При включении проверяет каждые 30 минут, однако проверяет только те моды, которые не проверялись по крайней мере 15 минут.
 Ручная проверка обновлений всегда проверяет GameBanana напрямую.</value>
   </data>
+  <data name="TranslatorNoteHeader.Text" xml:space="preserve">
+  <value>Примечание переводчика</value>
+  </data>
+<data name="TranslatorNoteContent.Text" xml:space="preserve">
+  <value>Спасибо за использование русской версии JASM. Если вы обнаружили какие-либо проблемы с переводом или у вас есть предложения по улучшению, пожалуйста, свяжитесь с нами. Мы стремимся обеспечить наилучший пользовательский опыт для русскоязычных пользователей.</value>
+</data>
+<data name="TranslatorFeedbackLink.Content" xml:space="preserve">
+  <value>Отзыв о переводе</value>
+</data>
   <data name="ModUpdateCheckerNextText.Text" xml:space="preserve">
     <value>Следующая проверка в:</value>
   </data>

@@ -315,7 +315,7 @@ public partial class CommandDefinitionVM : ObservableObject
         if (attributes.Count != 0)
         {
             //这个地方的处理有点奇怪，我觉得应该是先把所有属性都加上，然后再把最后一个属性的分隔符去掉
-            attributes.Insert(0, "Options: ");
+            attributes.Insert(0, "选项: ");
             var lastItem = attributes.Last().TrimEnd('|', ' ');
             attributes[^1] = lastItem;
         }

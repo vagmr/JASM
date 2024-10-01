@@ -164,6 +164,15 @@ JASM soporta parcialmente WUWA y ZZZ</value>
 Al activarse, verifica cada 30 minutos, pero solo los mods que no se han verificado en al menos 15 minutos.
 La verificación manual de actualizaciones siempre consulta directamente a GameBanana.</value>
   </data>
+  <data name="TranslatorNoteHeader.Text" xml:space="preserve">
+  <value>Nota del traductor</value>
+</data>
+<data name="TranslatorNoteContent.Text" xml:space="preserve">
+  <value>Gracias por usar la versión en español (Argentina) de JASM. Si encuentra algún problema de traducción o tiene sugerencias para mejorar, no dude en contactarnos. Nos esforzamos por brindar la mejor experiencia de usuario para los hispanohablantes.</value>
+</data>
+<data name="TranslatorFeedbackLink.Content" xml:space="preserve">
+  <value>Comentarios sobre la traducción</value>
+</data>
   <data name="ModUpdateCheckerNextText.Text" xml:space="preserve">
     <value>Próxima verificación en:</value>
   </data>

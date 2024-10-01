@@ -184,7 +184,7 @@
                     <TextBlock
                         Margin="0,0,0,8"
                         IsTextSelectionEnabled="True"
-                        Text="Settings are saved independently for each selected game." />
+                        Text="设置为每个选定的游戏独立保存." />
 
                     <ComboBox
                         x:Name="GameSelectorComboBox"
@@ -226,7 +226,21 @@
                         Content="Start Elevator Process..."
                         l:Uids.Uid="/Settings/StartElevatorButton" />
                 </StackPanel>
-
+                <TextBlock
+                 Style="{ThemeResource SubtitleTextBlockStyle}"
+                 Text="此版本由究极汉化"
+                 l:Uids.Uid="/Settings/TranslatorNoteHeader" />
+                <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
+                    <TextBlock
+                        IsTextSelectionEnabled="True"
+                        TextWrapping="WrapWholeWords"
+                        Text="目前并未完成全部汉化工作，有需要汉化的部分及时反馈。"
+                        l:Uids.Uid="/Settings/TranslatorNoteContent" />
+                    <HyperlinkButton
+                        Content="反馈翻译问题"
+                        NavigateUri="https://github.com/Jor/JASM/issues"
+                        l:Uids.Uid="/Settings/TranslatorFeedbackLink" />
+                </StackPanel>
                 <TextBlock
                     Style="{ThemeResource SubtitleTextBlockStyle}"
                     Text="Mod Update Checker"
@@ -265,11 +279,11 @@
 
                 </StackPanel>
 
-                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Commands" />
+                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="命令管理" />
                 <controls1:SettingsCard
                     Command="{x:Bind ViewModel.NavigateToCommandsSettingsCommand}"
                     Description="Commands (scripts) can be defined and then be run on specified mods"
-                    Header="Create Custom Commands"
+                    Header="创建自定义命令"
                     HeaderIcon="{ui:FontIcon Glyph=&#xE716;}"
                     IsClickEnabled="True" />
 
