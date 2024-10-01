@@ -479,14 +479,13 @@
             l:Uids.Uid="Settings_LocalizationAuthor" />
         <TextBlock
             Style="{ThemeResource BodyTextBlockStyle}"
-            Text="本人并没有很细致的检查汉化内容，如果发现问题，请不要在意。"
+            Text="本人未仔细检查每个翻译，如有错误，请勿在意。"
             l:Uids.Uid="Settings_LocalizationFeedback" />
         <HyperlinkButton
             Margin="{StaticResource SettingsPageHyperlinkButtonMargin}"
             Content="联系汉化作者"
-            NavigateUri="none" />
-    </StackPanel>
-</StackPanel>
+            NavigateUri="noe" />
+
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
