@@ -1,0 +1,105 @@
+name: 构建和发布JASM
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*.*.*" # 匹配所有版本标签
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        configuration: [Release]
+        platform: [x64]
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 设置.NET环境
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+
+      - name: 安装7zip
+        run: choco install 7zip.install -y
+
+      - name: 运行测试
+        run: dotnet test ${{ github.workspace }}\src
+
+      - name: 构建和打包常规版本
+        run: python ${{ github.workspace }}\Build\Release.py ExcludeElevator
+        shell: cmd
+
+      - name: 上传常规版本构建产物
+        uses: actions/upload-artifact@v3
+        with:
+          name: JASM_Regular
+          path: ${{ github.workspace }}\${{ env.zipFile }}
+
+      - name: 构建和打包自包含版本
+        if: startsWith(github.ref, 'refs/tags/')
+        run: python ${{ github.workspace }}\Build\Release.py SelfContained ExcludeElevator
+        shell: cmd
+
+      - name: 上传自包含版本构建产物
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/upload-artifact@v3
+        with:
+          name: JASM_SelfContained
+          path: ${{ github.workspace }}\${{ env.zipFile }}
+
+  release:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: windows-latest
+
+    steps:
+      - name: 下载常规版本构建产物
+        uses: actions/download-artifact@v3
+        with:
+          name: JASM_Regular
+
+      - name: 下载自包含版本构建产物
+        uses: actions/download-artifact@v3
+        with:
+          name: JASM_SelfContained
+
+      - name: 创建发布
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: 上传常规版本发布资产
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./JASM_v*.7z
+          asset_name: JASM_Regular.7z
+          asset_content_type: application/x-7z-compressed
+
+      - name: 上传自包含版本发布资产
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./SelfContained_JASM_v*.7z
+          asset_name: JASM_SelfContained.7z
+          asset_content_type: application/x-7z-compressed
