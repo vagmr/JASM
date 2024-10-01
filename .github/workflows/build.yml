@@ -29,9 +29,6 @@ jobs:
         with:
           dotnet-version: 8.x
 
-      - name: 安装7zip
-        run: choco install 7zip.install -y
-
       - name: 运行测试
         run: dotnet test ${{ github.workspace }}\src
 
@@ -90,7 +87,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./JASM_v*.7z
+          asset_path: ./JASM_v2.16.0.7z
           asset_name: JASM_Regular.7z
           asset_content_type: application/x-7z-compressed
 
@@ -100,6 +97,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./SelfContained_JASM_v*.7z
+          asset_path: ./SelfContained_JASM_v2.16.0.7z
           asset_name: JASM_SelfContained.7z
           asset_content_type: application/x-7z-compressed
