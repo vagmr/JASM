@@ -468,24 +468,6 @@
                             Content="Ignore Current Update?"
                             Visibility="{x:Bind ViewModel.ShowNewVersionAvailable, Mode=OneWay, Converter={StaticResource BoolToVisibleConverter}}" />
                     </StackPanel>
-                    <TextBlock
-        Style="{ThemeResource SubtitleTextBlockStyle}"
-        Text="汉化信息"
-        l:Uids.Uid="Settings_LocalizationInfo" />
-    <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
-        <TextBlock
-            Style="{ThemeResource BodyTextBlockStyle}"
-            Text="汉化作者：究极"
-            l:Uids.Uid="Settings_LocalizationAuthor" />
-        <TextBlock
-            Style="{ThemeResource BodyTextBlockStyle}"
-            Text="本人未仔细检查每个翻译，如有错误，请勿在意。"
-            l:Uids.Uid="Settings_LocalizationFeedback" />
-        <HyperlinkButton
-            Margin="{StaticResource SettingsPageHyperlinkButtonMargin}"
-            Content="联系汉化作者"
-            NavigateUri="noe" />
-
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
