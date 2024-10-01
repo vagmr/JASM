@@ -315,11 +315,8 @@ public partial class CharactersViewModel : ObservableRecipient, INavigationAware
         _category = category;
         CategoryPageTitle =
             $"{category.DisplayName} {_localizer.GetLocalizedStringOrDefault("Overview", useUidAsDefaultValue: true)}";
-        ModToggleText = $"Show only {category.DisplayNamePlural} with Mods";
         ModToggleText = "只显示带有模组的角色";
-        ModNotificationsToggleText = $"Show only {category.DisplayNamePlural} with Mod Notifications";
         ModNotificationsToggleText = "只显示有模组更新通知的的角色";
-        SearchBoxPlaceHolder = $"Search {category.DisplayNamePlural}...";
         SearchBoxPlaceHolder = "搜索角色...";
 
 
