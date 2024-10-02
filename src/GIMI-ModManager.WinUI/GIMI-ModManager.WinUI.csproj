@@ -545,6 +545,7 @@
 		<Content Remove="Assets\Games\WuWa\Images\Characters\Yinlin.png" />
 		<Content Remove="Assets\Games\WuWa\Images\Characters\Yuanwu.png" />
 		<Content Remove="Assets\Games\WuWa\Images\Characters\Zhezhi.png" />
+		<content Remove="Assets\Games\WuWa\Images\Characters\shorekeeper.png" />
 		<Content Remove="Assets\Games\WuWa\Images\Start_Game.png" />
 		<Content Remove="Assets\Games\WuWa\npcs.json" />
 		<Content Remove="Assets\Games\WuWa\objects.json" />
