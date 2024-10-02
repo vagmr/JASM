@@ -234,10 +234,10 @@
                     <TextBlock
                         IsTextSelectionEnabled="True"
                         TextWrapping="WrapWholeWords"
-                        Text="目前并未完成全部汉化工作，有需要汉化的部分及时反馈。"
+                        Text="目前并未完成全部汉化工作，添加了守岸人分类。"
                         l:Uids.Uid="/Settings/TranslatorNoteContent" />
                     <HyperlinkButton
-                        Content="反馈翻译问题"
+                        Content="我并未仔细研究代码，有问题可以反馈"
                         NavigateUri="https://github.com/Jor/JASM/issues"
                         l:Uids.Uid="/Settings/TranslatorFeedbackLink" />
                 </StackPanel>

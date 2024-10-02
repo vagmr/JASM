@@ -100,10 +100,10 @@
   <value>此版本由究极汉化</value>
 </data>
 <data name="TranslatorNoteContent.Text" xml:space="preserve">
-  <value>目前并未完成全部汉化工作，有需要汉化的部分或者翻译错误可以反馈</value>
+  <value>目前并未完成全部汉化工作，添加了守岸人分类</value>
 </data>
 <data name="TranslatorFeedbackLink.Content" xml:space="preserve">
-  <value>反馈翻译问题</value>
+  <value>我并未仔细研究代码，有问题可以反馈</value>
 </data>
   <data name="ModUpdateCheckerCheckBox.Content" xml:space="preserve">
     <value>自动检查修改更新</value>

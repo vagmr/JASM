@@ -222,7 +222,7 @@
   },
   {
     "Keys": ["Changli"],
-    "ReleaseDate": "2025-06-6T00:00:00",
+    "ReleaseDate": "2024-06-6T00:00:00",
     "Image": "Changli.png",
     "Rarity": 5,
     "Element": "Fusion",
@@ -235,7 +235,7 @@
   },
   {
     "Keys": ["Jinhsi"],
-    "ReleaseDate": "2025-06-6T00:00:00",
+    "ReleaseDate": "2024-06-6T00:00:00",
     "Image": "Jinhsi.png",
     "Rarity": 5,
     "Element": "Spectro",
@@ -248,7 +248,7 @@
   },
   {
     "Keys": ["Zhezhi"],
-    "ReleaseDate": "2025-08-15T00:00:00",
+    "ReleaseDate": "2024-08-15T00:00:00",
     "Image": "Zhezhi.png",
     "Rarity": 5,
     "Element": "Glacio",
@@ -261,7 +261,7 @@
   },
   {
     "Keys": ["Xiangliyao"],
-    "ReleaseDate": "2025-08-15T00:00:00",
+    "ReleaseDate": "2024-08-15T00:00:00",
     "Image": "Xiangliyao.png",
     "Rarity": 5,
     "Element": "Electro",
