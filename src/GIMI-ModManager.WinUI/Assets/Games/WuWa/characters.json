@@ -283,7 +283,7 @@
     "ModFilesName": "shorekeeper",
     "InGameSkins": [],
     "InternalName": "Shorekeeper",
-    "DisplayName": "守岸人"
+    "DisplayName": "shorekeeper"
   },
   {
     "Keys": ["YOUHU"],
@@ -296,6 +296,6 @@
     "ModFilesName": "YouHu",
     "InGameSkins": [],
     "InternalName": "YouHu",
-    "DisplayName": "釉瑚"
+    "DisplayName": "YOUHU"
   }
 ]
