@@ -322,7 +322,7 @@
 
                     <StackPanel Orientation="Horizontal">
                         <MenuBar>
-                            <MenuBarItem Title="Mod菜单" Style="{StaticResource CustomMenuBarItemStyle}">
+                            <MenuBarItem Title="Mod菜单" Background="#f1356d">
                                 <MenuBarItem.Items>
                                     <MenuFlyoutItem
                                         Command="{x:Bind ViewModel.AddModFolderCommand}"
@@ -347,7 +347,7 @@
                                 </MenuBarItem.Items>
                             </MenuBarItem>
 
-                            <MenuBarItem Title="文件夹菜单" Style="{StaticResource CustomMenuBarItemStyle}">
+                            <MenuBarItem Title="文件夹菜单" Background="#CC5176">
                                 <MenuFlyoutItem Command="{x:Bind ViewModel.OpenModsFolderCommand}" Text="打开该角色的Mod文件夹..." />
                                 <MenuFlyoutSeparator />
                                 <MenuFlyoutItem Command="{x:Bind ViewModel.OpenGIMIRootFolderCommand}" Text="打开3Dmigoto根文件夹..." />
