@@ -331,7 +331,7 @@
 
                                     <MenuFlyoutItem
                                         Command="{x:Bind ViewModel.AddModArchiveCommand}"
-                                        ToolTipService.ToolTip="从压缩包中添加模组(译者提醒不能为加密压缩包)"
+                                        ToolTipService.ToolTip="从压缩包中添加模组"
                                         Text="添加压缩包...">
                                         <MenuFlyoutItem.KeyboardAccelerators>
                                             <KeyboardAccelerator Key="O" Modifiers="Control" />

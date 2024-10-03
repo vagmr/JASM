@@ -16,24 +16,36 @@
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
-    <Style x:Key="CustomMenuBarItemStyle" TargetType="MenuBarItem">
-        <Setter Property="Background" Value="#E0E0E0"/>
+        <Style x:Key="CustomMenuBarItemStyle" TargetType="MenuBarItem">
+        <Setter Property="Background" Value="#F0F0F0"/>
+        <Setter Property="Foreground" Value="#333333"/>
         <Setter Property="Padding" Value="10,5"/>
-        <Setter Property="CornerRadius" Value="4"/>
         <Setter Property="Template">
-        <Setter.Value>
-            <ControlTemplate TargetType="MenuBarItem">
-                <Border
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    CornerRadius="{TemplateBinding CornerRadius}">
-                    <ContentPresenter
-                        Content="{TemplateBinding Title}"
-                        VerticalAlignment="Center"
-                        HorizontalAlignment="Center"/>
-                </Border>
-            </ControlTemplate>
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuBarItem">
+                    <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="RootGrid.Background" Value="#E0E0E0"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Target="RootGrid.Background" Value="#D0D0D0"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter
+                            Content="{TemplateBinding Title}"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Margin="{TemplateBinding Padding}"/>
+                    </Grid>
+                </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>

@@ -193,7 +193,7 @@ public sealed partial class CharacterDetailsPage : Page
             // Create the TextBlock for "Drop Mods Here"
             var dropText = new TextBlock
             {
-                Text = "将模组拖放到这里(可以拖放压缩包但不能为加密的)",
+                Text = "文件拖到这里(不能为加密压缩包)",
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
                 FontSize = 20,
