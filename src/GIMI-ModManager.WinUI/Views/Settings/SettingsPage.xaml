@@ -239,7 +239,7 @@
                     <TextBlock
                         IsTextSelectionEnabled="True"
                         TextWrapping="WrapWholeWords"
-                        Text="已完成部分汉化工作，并添加了守岸人分类。"
+                        Text="已完成部分汉化工作，并添加了守岸人和釉瑚分类。"
                         l:Uids.Uid="/Settings/TranslatorNoteContent" />
                     <HyperlinkButton
                         Content="我并未仔细研究代码，有问题可以反馈"
