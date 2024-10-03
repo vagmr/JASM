@@ -156,7 +156,7 @@ public sealed partial class CharacterDetailsPage : Page
 
             var title = new TextBlock()
             {
-                Text = "No mods found for this character 😖",
+                Text = "没有找到该角色的模组😖",
                 FontSize = 28,
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
@@ -193,7 +193,7 @@ public sealed partial class CharacterDetailsPage : Page
             // Create the TextBlock for "Drop Mods Here"
             var dropText = new TextBlock
             {
-                Text = "Drop Mods Here",
+                Text = "将模组拖放到这里(可以拖放压缩包但不能为加密的)",
                 HorizontalAlignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
                 FontSize = 20,
@@ -598,7 +598,7 @@ public sealed partial class CharacterDetailsPage : Page
         if (tooltip is ToolTip) return;
         var toolTip = new ToolTip
         {
-            Content = "This character only has one default in-game skin, so you can't change it.",
+            Content = "这个角色只有一个默认的游戏皮肤，所以你无法更换皮肤。",
             Placement = PlacementMode.Bottom
         };
 

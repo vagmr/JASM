@@ -199,7 +199,7 @@
                 <ToggleSwitch
                     x:Name="ViewToggleSwitch"
                     IsOn="True"
-                    OffContent="Detailed View"
+                    OffContent="细节视图"
                     OnContent="Gallery View"
                     Toggled="ViewToggleSwitch_OnToggled" />
 
