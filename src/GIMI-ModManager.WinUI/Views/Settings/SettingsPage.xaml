@@ -228,7 +228,7 @@
                 </StackPanel>
                 <TextBlock
                  Style="{ThemeResource SubtitleTextBlockStyle}"
-                 Text="此版本由究极汉化"
+                 Text="此版本由究极更新汉化，非官方版"
                  l:Uids.Uid="/Settings/TranslatorNoteHeader" />
                 <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
                     <TextBlock
