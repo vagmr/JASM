@@ -71,5 +71,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./JASM_v2.16.0.7z
-          asset_name: JASM_v2.16.1.7z
+          asset_name: JASM_v2.16.0_20241003.7z
           asset_content_type: application/x-7z-compressed

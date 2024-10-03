@@ -97,10 +97,10 @@
     <value>修改文件夹</value>
   </data>
   <data name="TranslatorNoteHeader.Text" xml:space="preserve">
-  <value>此版本由究极更新汉化，非官方版</value>
+  <value>版本说明</value>
 </data>
 <data name="TranslatorNoteContent.Text" xml:space="preserve">
-  <value>目前并未完成全部汉化工作，添加了守岸人分类</value>
+  <value>已完成部分汉化工作，并添加了守岸人分类</value>
 </data>
 <data name="TranslatorFeedbackLink.Content" xml:space="preserve">
   <value>我并未仔细研究代码，有问题可以反馈</value>

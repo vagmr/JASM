@@ -228,13 +228,18 @@
                 </StackPanel>
                 <TextBlock
                  Style="{ThemeResource SubtitleTextBlockStyle}"
-                 Text="此版本由究极更新汉化，非官方版"
+                 Text="版本说明"
                  l:Uids.Uid="/Settings/TranslatorNoteHeader" />
                 <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
                     <TextBlock
                         IsTextSelectionEnabled="True"
                         TextWrapping="WrapWholeWords"
-                        Text="目前并未完成全部汉化工作，添加了守岸人分类。"
+                        Text="本版本由究极在官方最新版基础上进行汉化和更新，非官方版本。"
+                         />
+                    <TextBlock
+                        IsTextSelectionEnabled="True"
+                        TextWrapping="WrapWholeWords"
+                        Text="已完成部分汉化工作，并添加了守岸人分类。"
                         l:Uids.Uid="/Settings/TranslatorNoteContent" />
                     <HyperlinkButton
                         Content="我并未仔细研究代码，有问题可以反馈"
