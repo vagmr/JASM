@@ -234,7 +234,7 @@
                     <TextBlock
                         IsTextSelectionEnabled="True"
                         TextWrapping="WrapWholeWords"
-                        Text="此版本由究极基于JASM 2.16.1版本进行更新和汉化，非官方版本。"
+                        Text="此版本由究极基于JASM 2.16.0版本进行更新和汉化，非官方版本。"
                          />
                     <TextBlock
                         IsTextSelectionEnabled="True"
@@ -242,7 +242,7 @@
                         Text="已完成部分汉化工作。"
                         l:Uids.Uid="/Settings/TranslatorNoteContent" />
                     <HyperlinkButton
-                        Content="注意：此版本后续更新将不再使用官方版本的更新检查"
+                        Content="注意：此版本后续更新将不再使用官方的更新通道。"
                         NavigateUri="https://github.com/Jor/JASM/issues"
                         l:Uids.Uid="/Settings/TranslatorFeedbackLink" />
                 </StackPanel>
@@ -262,15 +262,17 @@
                             <TextBlock Text="• 更新了 Runtime 至 1.61 版本。" Margin="16,0,0,0"/>
                             <TextBlock Text="文本内容更新：" FontWeight="SemiBold" Margin="0,8,0,0"/>
                             <StackPanel Margin="16,0,0,0">
-                                <TextBlock Text="• 更新了 PresetPage.xaml 中的文本内容。"/>
-                                <TextBlock Text="• 优化了 PresetPage.xaml.cs 中预设的描述。"/>
-                                <TextBlock Text="• 修正了 SettingsPage.xaml 中的版本链接。"/>
-                                <TextBlock Text="• 完成了对mod安装界面的本地化。"/>
+                                <TextBlock Text="• 更新了预设中的文本内容。"/>
+                                <TextBlock Text="• 优化了预设的描述。"/>
+                                <TextBlock Text="• 修正了版本链接。"/>
+                                <TextBlock Text="• 完成了对mod安装界面的汉化。"/>
                                 <TextBlock Text="• 配置了滑翔伞和武器的图片。"/>
                             </StackPanel>
 
                             <TextBlock Text="其他更新：" FontWeight="SemiBold" Margin="0,8,0,0"/>
                             <TextBlock Text="• 更新了项目版本号和发布链接。" Margin="16,0,0,0"/>
+                            <TextBlock Text="• 加入了版本更新日志。" Margin="16,0,0,0"/>
+                            <TextBlock Text="• 加入了自包含版本。" Margin="16,0,0,0"/>
                         </StackPanel>
                     </Expander.Content>
                 </Expander>
