@@ -461,39 +461,35 @@
                     <TextBlock
                         Style="{ThemeResource SubtitleTextBlockStyle}"
                         Text="版本更新日志"
-                        Margin="0,16,0,8"/>
-                    <RichTextBlock
-                        Margin="0,8,0,16"
-                        IsTextSelectionEnabled="True"
-                        TextWrapping="WrapWholeWords">
-                        <Paragraph>
-                            <Run Text="Version 2.16.4:" />
-                            <LineBreak />
-                            <Run Text="依赖更新：" />
-                            <LineBreak />
-                            <Run Text="- 更新了 Runtime 至 1.61 版本。" />
-                            <LineBreak />
-                            <Run Text="文本内容更新：" />
-                            <LineBreak />
-                            <Run Text="- 更新了 PresetPage.xaml 中的文本内容。" />
-                            <LineBreak />
-                            <Run Text="- 优化了 PresetPage.xaml.cs 中预设的描述。" />
-                            <LineBreak />
-                            <Run Text="- 修正了 SettingsPage.xaml 中的版本链接。" />
-                            <LineBreak />
-                            <Run Text="- 修正了 JASM.AutoUpdater/MainPageVM.cs 中的版本链接。" />
-                            <LineBreak />
-                            <Run Text="文件更新：" />
-                            <LineBreak />
-                            <Run Text="- 新增了 Character_Gliders_Thumb.webp 和 Character_Weapons_Thumb.webp 文件。" />
-                            <LineBreak />
-                            <Run Text="- 更新了 GIMI-ModManager.WinUI/Assets/Games/WuWa/Languages/zh-cn/characters.json,添加了伞翼(Gliders)的显示名称。" />
-                            <LineBreak />
-                            <Run Text="其他更新：" />
-                            <LineBreak />
-                            <Run Text="- 更新了项目版本号和发布链接。" />
-                        </Paragraph>
-                    </RichTextBlock>
+                        Margin="0,24,0,12"/>
+
+                    <controls1:Expander Margin="0,0,0,16">
+                        <controls1:Expander.Header>
+                            <TextBlock Text="Version 2.16.4" FontWeight="SemiBold"/>
+                        </controls1:Expander.Header>
+                        <controls1:Expander.Content>
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="依赖更新：" FontWeight="SemiBold"/>
+                                <BulletedList>
+                                    <ListItem>更新了 Runtime 至 1.61 版本。</ListItem>
+                                </BulletedList>
+
+                                <TextBlock Text="文本内容更新：" FontWeight="SemiBold" Margin="0,8,0,0"/>
+                                <BulletedList>
+                                    <ListItem>更新了 PresetPage.xaml 中的文本内容。</ListItem>
+                                    <ListItem>优化了 PresetPage.xaml.cs 中预设的描述。</ListItem>
+                                    <ListItem>修正了 SettingsPage.xaml 中的版本链接。</ListItem>
+                                    <ListItem>完成了对mod安装界面的本地化。</ListItem>
+                                    <ListItem>配置了滑翔伞和武器的图片。</ListItem>
+                                </BulletedList>
+
+                                <TextBlock Text="其他更新：" FontWeight="SemiBold" Margin="0,8,0,0"/>
+                                <BulletedList>
+                                    <ListItem>更新了项目版本号和发布链接。</ListItem>
+                                </BulletedList>
+                            </StackPanel>
+                        </controls1:Expander.Content>
+                    </controls1:Expander>
 
                     <StackPanel Margin="0,16,0,16" Orientation="Horizontal">
                         <Button

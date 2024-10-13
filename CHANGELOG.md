@@ -3,43 +3,6 @@
 ## [2.16.4](https://github.com/vagmr/JASM/compare/v2.16.3...v2.16.4) (2024-10-13)
 
 
-### Features
-* 添加了伞翼（Gliders）的显示名称。
-
-### Dependencies
-* 更新了 CommunityToolkit.WinUI.Extensions 至 8.1.240916。
-* 更新了 Microsoft.Extensions.DependencyInjection 至 8.0.1。
-* 更新了 Microsoft.Extensions.Http 至 8.0.1。
-* 更新了 Polly 至 8.4.2。
-* 更新了 Polly.RateLimiting 至 8.4.2。
-* 更新了 Serilog 至 4.0.2。
-* 更新了 CommunityToolkit.WinUI.Controls.Segmented 至 8.1.240916。
-* 更新了 CommunityToolkit.WinUI.Controls.SettingsControls 至 8.1.240916。
-* 更新了 FluentValidation 至 11.10.0。
-* 更新了 FluentValidation.DependencyInjectionExtensions 至 11.10.0。
-* 更新了 Microsoft.Extensions.Hosting 至 8.0.1。
-* 更新了 Microsoft.Extensions.Http.Polly 至 8.0.10。
-* 更新了 Microsoft.WindowsAppSDK 至 1.6.240923002。
-* 更新了 Polly.Contrib.WaitAndRetry 至 1.1.1。
-* 更新了 Polly.Extensions 至 8.4.2。
-* 更新了 Polly.Extensions.Http 至 3.0.0。
-* 更新了 Serilog.Settings.Configuration 至 8.0.4。
-* 更新了 WinUIEx 至 2.4.2。
-
-### Text Content
-* 更新了 PresetPage.xaml 中的文本内容，移除了“不清楚是什么意思”的提示。
-* 更新了 PresetPage.xaml.cs 中的文本内容，优化了预设的描述。
-* 更新了 SettingsPage.xaml 中的文本内容，修正了版本链接。
-* 更新了 JASM.AutoUpdater/MainPageVM.cs 中的文本内容，修正了版本链接。
-
-### Files
-* 添加了两个新文件：Character_Gliders_Thumb.webp 和 Character_Weapons_Thumb.webp。
-* 更新了 GIMI-ModManager.WinUI/Assets/Games/WuWa/Languages/zh-cn/characters.json，添加了伞翼（Gliders）的显示名称。
-* 更新了项目版本号和发布链接。
-
-### Miscellaneous
-* 重命名了 GitHub Actions 工作流文件 build.yml 为 build-Release.yml。
-* 更新了 GitHub Actions 工作流以获取版本号并正确构建发布资产。
 
 
 
