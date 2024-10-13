@@ -231,7 +231,7 @@
                     Text="版本说明"
                     l:Uids.Uid="/Settings/TranslatorNoteHeader" />
                 <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
-                    <Border Background="{ThemeResource ControlBackgroundBrush}" Padding="10" CornerRadius="5">
+                    <Border  Padding="10" CornerRadius="5">
                         <StackPanel>
                             <TextBlock
                                 IsTextSelectionEnabled="True"
