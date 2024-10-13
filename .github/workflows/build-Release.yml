@@ -15,6 +15,7 @@ jobs:
       matrix:
         configuration: [Release]
         platform: [x64]
+        build_type: [Regular, SelfContained]
 
     steps:
       - name: 检出代码
@@ -30,14 +31,14 @@ jobs:
       - name: 运行测试
         run: dotnet test ${{ github.workspace }}\src
 
-      - name: 构建和打包常规版本
-        run: python ${{ github.workspace }}\Build\Release.py ExcludeElevator
+      - name: 构建和打包
+        run: python ${{ github.workspace }}\Build\Release.py ${{ matrix.build_type == 'SelfContained' && 'SelfContained' || '' }} ExcludeElevator
         shell: cmd
 
-      - name: 上传常规版本构建产物
+      - name: 上传构建产物
         uses: actions/upload-artifact@v3
         with:
-          name: JASM_Regular
+          name: JASM_${{ matrix.build_type }}
           path: ${{ github.workspace }}\${{ env.zipFile }}
 
   release:
@@ -50,6 +51,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: JASM_Regular
+
+      - name: 下载自包含版本构建产物
+        uses: actions/download-artifact@v3
+        with:
+          name: JASM_SelfContained
 
       - name: 获取版本号
         id: get_version
@@ -73,6 +79,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./JASM_v${{ steps.get_version.outputs.VERSION }}.7z
-          asset_name: JASM_v${{ steps.get_version.outputs.VERSION }}.7z
+          asset_path: ./JASM_v${{ steps.get_version.outputs.VERSION }}_Regular.7z
+          asset_name: JASM_v${{ steps.get_version.outputs.VERSION }}_Regular.7z
+          asset_content_type: application/x-7z-compressed
+
+      - name: 上传自包含版本发布资产
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./JASM_v${{ steps.get_version.outputs.VERSION }}_SelfContained.7z
+          asset_name: JASM_v${{ steps.get_version.outputs.VERSION }}_SelfContained.7z
           asset_content_type: application/x-7z-compressed

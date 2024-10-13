@@ -1,4 +1,3 @@
-
 import os
 import shutil
 import re
@@ -18,7 +17,7 @@ JASM_Updater_FolderName = "JASM - Auto Updater_New"
 RELEASE_DIR = "output"
 JASM_RELEASE_DIR = "output\\JASM"
 
-SelfContained =  sys.argv[1] == "SelfContained" if len(sys.argv) > 1  else False
+SelfContained = "SelfContained" in sys.argv
 ExcludeElevator = "ExcludeElevator" in sys.argv
 
 def checkSuccessfulExitCode(exitCode: int) -> None:
@@ -33,7 +32,7 @@ def extractVersionNumber() -> str:
 			if line.startswith("<VersionPrefix>"):
 				return re.findall("\d+\.\d+\.\d+", line)
 
-print("PostBuild.py")
+print("Release.py")
 print("PWD: " + os.getcwd())
 print("SelfContained: " + str(SelfContained))
 
@@ -43,85 +42,59 @@ if versionNumber is None or len(versionNumber) == 0:
 	exit(1)
 versionNumber = versionNumber[0]
 
-if (ExcludeElevator == False):
-	print("Building Elevator...")
-	elevatorPublishCommand = "dotnet publish " + ELEVATOR_CSPROJ + " /p:PublishProfile=FolderProfile.pubxml -c Release"
-	print(elevatorPublishCommand)
-	checkSuccessfulExitCode(os.system(elevatorPublishCommand))
-	print()
-	print("Finished building Elevator")
-else:
-	print("Skipping Elevator")
-	print()
+# 构建函数
+def build_project(project_name, csproj_path, output_path, self_contained=False):
+	print(f"Building {project_name}...")
+	publish_profile = "FolderProfileSelfContained.pubxml" if self_contained else "FolderProfile.pubxml"
+	publish_command = f"dotnet publish {csproj_path} /p:PublishProfile={publish_profile} -c Release"
+	print(publish_command)
+	checkSuccessfulExitCode(os.system(publish_command))
+	print(f"Finished building {project_name}")
+	return output_path
 
+# 构建 Elevator (如果需要)
+if not ExcludeElevator:
+	build_project("Elevator", ELEVATOR_CSPROJ, ELEVATOR_OUTPUT_FILE)
 
-if (SelfContained == False):
-	print("Building JASM - Auto Updater...")
-	jasmUpdaterPublishCommand = "dotnet publish " + JASM_Updater_CSPROJ + " /p:PublishProfile=FolderProfile.pubxml -c Release"
-	print(jasmUpdaterPublishCommand)
-	checkSuccessfulExitCode(os.system(jasmUpdaterPublishCommand))
-	print()
-	print("Finished building JASM - Auto Updater")
-else:
-	print("Skipping JASM - Auto Updater build because it is not supported for self-contained build")
-	print()
+# 构建 JASM Auto Updater (仅非自包含版本)
+if not SelfContained:
+	build_project("JASM - Auto Updater", JASM_Updater_CSPROJ, JASM_Updater_OUTPUT)
 
-print("Building JASM...")
-jasmPublishCommand = "dotnet publish " + JASM_CSPROJ + (" /p:PublishProfile=FolderProfileSelfContained.pubxml" if SelfContained else " /p:PublishProfile=FolderProfile.pubxml") + " -c Release" 
-print(jasmPublishCommand)
-checkSuccessfulExitCode(os.system(jasmPublishCommand))
-print()
-print("Finished building JASM")
+# 构建 JASM (自包含和非自包含版本)
+jasm_output = build_project("JASM", JASM_CSPROJ, JASM_OUTPUT, SelfContained)
 
-# Create release directory
+# 创建发布目录
 os.makedirs(RELEASE_DIR, exist_ok=True)
 os.makedirs(JASM_RELEASE_DIR, exist_ok=True)
 
-if (ExcludeElevator == False):
+# 复制文件到发布目录
+if not ExcludeElevator:
 	print("Copying Elevator to JASM...")
-	checkSuccessfulExitCode(os.system("copy " + ELEVATOR_OUTPUT_FILE + " " + JASM_RELEASE_DIR))
-	print()
-	print("Finished copying Elevator to release directory")
+	checkSuccessfulExitCode(os.system(f"copy {ELEVATOR_OUTPUT_FILE} {JASM_RELEASE_DIR}"))
 
 print("Copying JASM to output...")
-shutil.copytree(JASM_OUTPUT, JASM_RELEASE_DIR, dirs_exist_ok=True)
-print()
-print("Finished copying JASM to release directory")
+shutil.copytree(jasm_output, JASM_RELEASE_DIR, dirs_exist_ok=True)
 
-if (SelfContained == False):
+if not SelfContained:
 	print("Copying JASM - Auto Updater to output...")
-	os.mkdir(JASM_RELEASE_DIR + "\\" + JASM_Updater_FolderName)
-	shutil.copytree(JASM_Updater_OUTPUT, JASM_RELEASE_DIR + "\\" + JASM_Updater_FolderName, dirs_exist_ok=True)
-	print()
-	print("Finished copying JASM - Auto Updater to release directory")
+	os.makedirs(os.path.join(JASM_RELEASE_DIR, JASM_Updater_FolderName), exist_ok=True)
+	shutil.copytree(JASM_Updater_OUTPUT, os.path.join(JASM_RELEASE_DIR, JASM_Updater_FolderName), dirs_exist_ok=True)
 
 print("Copying text files to RELEASE_DIR...")
 shutil.copy("Build\\README.txt", RELEASE_DIR)
-shutil.copy("CHANGELOG.md", RELEASE_DIR + "\\CHANGELOG.txt")
+shutil.copy("CHANGELOG.md", os.path.join(RELEASE_DIR, "CHANGELOG.txt"))
 
-print("Finished copying text files to release directory")
-
+# 压缩发布目录
 print("Zipping release directory...")
-print("7z a -t7z -xm4 JASM.7z " + RELEASE_DIR)
-releaseArchiveName = "JASM_v" + versionNumber + ".7z"
-if (SelfContained):
-	releaseArchiveName = "SelfContained_" + releaseArchiveName
-
+releaseArchiveName = f"JASM_v{versionNumber}_{'SelfContained' if SelfContained else 'Regular'}.7z"
 checkSuccessfulExitCode(os.system(f"7z a -mx4 {releaseArchiveName} .\\{RELEASE_DIR}\\*"))
-print()
-print("Finished zipping release directory")
 
+# 设置 GitHub Actions 环境变量
 env_file = os.getenv('GITHUB_ENV')
-if env_file is None:
-	exit(1)
-
-with open(env_file, "a") as myfile:
-    myfile.write(f"zipFile={releaseArchiveName}")
+if env_file:
+	with open(env_file, "a") as myfile:
+		myfile.write(f"zipFile={releaseArchiveName}")
 
 checkSuccessfulExitCode(os.system(f"7z h -scrcsha256 .\\{releaseArchiveName}"))
 
-
 exit(0)
-
-
-
