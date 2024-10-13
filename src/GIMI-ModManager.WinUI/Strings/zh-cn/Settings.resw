@@ -100,10 +100,10 @@
   <value>版本说明</value>
 </data>
 <data name="TranslatorNoteContent.Text" xml:space="preserve">
-  <value>已完成部分汉化工作，并添加了守岸人和釉瑚分类</value>
+  <value>已完成部分汉化工作</value>
 </data>
 <data name="TranslatorFeedbackLink.Content" xml:space="preserve">
-  <value>我并未仔细研究代码，有问题可以反馈</value>
+  <value>注意：此版本后续更新将不再使用官方版本的更新检查</value>
 </data>
   <data name="ModUpdateCheckerCheckBox.Content" xml:space="preserve">
     <value>自动检查修改更新</value>

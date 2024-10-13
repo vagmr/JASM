@@ -227,23 +227,35 @@
                         l:Uids.Uid="/Settings/StartElevatorButton" />
                 </StackPanel>
                 <TextBlock
-                 Style="{ThemeResource SubtitleTextBlockStyle}"
-                 Text="版本说明"
-                 l:Uids.Uid="/Settings/TranslatorNoteHeader" />
+                    Style="{ThemeResource SubtitleTextBlockStyle}"
+                    Text="版本说明"
+                    l:Uids.Uid="/Settings/TranslatorNoteHeader" />
                 <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
-                    <TextBlock
-                        IsTextSelectionEnabled="True"
-                        TextWrapping="WrapWholeWords"
-                        Text="本版本由究极在官方最新版基础上进行汉化和更新，非官方版本。"
-                         />
-                    <TextBlock
-                        IsTextSelectionEnabled="True"
-                        TextWrapping="WrapWholeWords"
-                        Text="已完成部分汉化工作，并添加了守岸人和釉瑚分类。"
-                        l:Uids.Uid="/Settings/TranslatorNoteContent" />
+                    <Border Background="{ThemeResource ControlBackgroundBrush}" Padding="10" CornerRadius="5">
+                        <StackPanel>
+                            <TextBlock
+                                IsTextSelectionEnabled="True"
+                                TextWrapping="WrapWholeWords"
+                                Text="本版本由究极在官方2.16.0版本基础上进行汉化和更新，非官方版本。"
+                                Margin="0,0,0,5" />
+                            <TextBlock
+                                IsTextSelectionEnabled="True"
+                                TextWrapping="WrapWholeWords"
+                                Text="已完成部分汉化工作。"
+                                l:Uids.Uid="/Settings/TranslatorNoteContent" />
+                            <TextBlock
+                                Margin="0,10,0,0"
+                                Style="{ThemeResource SubtitleTextBlockStyle}"
+                                Text="更新日志" />
+                            <TextBlock
+                                Margin="0,5,0,0"
+                                TextWrapping="WrapWholeWords"
+                                Text="**新特性**&#x0a;- 添加了"伞翼"分类。&#x0a;- 在"设置"页面中添加了版本说明。&#x0a;&#x0a;**优化与改进**&#x0a;- 优化了预设页面的文本描述。&#x0a;- 修改了设置页面中的版本说明样式，使其更加突出。&#x0a;- 更新了"守岸人"和"釉瑚"分类的汉化。&#x0a;&#x0a;**Bug修复**&#x0a;- 修复了更新检查器在特定情况下无法正确获取最新版本的问题。&#x0a;&#x0a;**其他**&#x0a;- 更新了项目依赖和部分代码，以适应新功能和改进。" />
+                        </StackPanel>
+                    </Border>
                     <HyperlinkButton
-                        Content="我并未仔细研究代码，有问题可以反馈"
-                        NavigateUri="https://github.com/Jor/JASM/issues"
+                        Content="注意：此版本后续更新将不再使用官方版本的更新检查"
+                        NavigateUri="https://github.com/vagmr/JASM/issues"
                         l:Uids.Uid="/Settings/TranslatorFeedbackLink" />
                 </StackPanel>
                 <TextBlock
@@ -437,7 +449,7 @@
                     <HyperlinkButton
                         Margin="{StaticResource SettingsPageHyperlinkButtonMargin}"
                         Content="Just Another Skin Manager Github"
-                        NavigateUri="https://github.com/Jorixon/JASM" />
+                        NavigateUri="https://github.com/vagmr/JASM" />
                     <HyperlinkButton
                         Margin="{StaticResource SettingsPageHyperlinkButtonMargin}"
                         Content="Just Another Skin Manager GameBanana"
@@ -450,7 +462,7 @@
                             VerticalAlignment="Center"
                             Text="{x:Bind ViewModel.LatestVersion, Mode=OneWay}" />
 
-                        <controls:LinkButton Link="https://github.com/Jorixon/JASM/releases/latest" Text="See what's new in the latest release" />
+                        <controls:LinkButton Link="https://github.com/vagmr/JASM/releases/latest" Text="See what's new in the latest release" />
 
                     </StackPanel>
 

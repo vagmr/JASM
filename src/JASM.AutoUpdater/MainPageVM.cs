@@ -31,7 +31,7 @@ public partial class MainPageVM : ObservableRecipient
 
     [ObservableProperty] private bool _updateProcessStarted = false;
     [ObservableProperty] private string _latestVersion = "-----";
-    [ObservableProperty] private Uri _defaultBrowserUri = new("https://github.com/Jorixon/JASM/releases");
+    [ObservableProperty] private Uri _defaultBrowserUri = new("https://github.com/vagmr/JASM/releases");
 
     public ObservableCollection<LogEntry> ProgressLog { get; } = new();
 
@@ -168,7 +168,7 @@ public partial class MainPageVM : ObservableRecipient
         }
 
         release.DownloadUrl = new Uri(getJasmAsset.browser_download_url);
-        release.BrowserUrl = new Uri(newestVersionFound?.html_url ?? "https://github.com/Jorixon/JASM/releases");
+        release.BrowserUrl = new Uri(newestVersionFound?.html_url ?? "https://github.com/vagmr/JASM/releases");
         release.FileName = getJasmAsset.name ?? "JASM.zip";
 
         LatestVersion = release.Version.ToString();
@@ -384,7 +384,7 @@ public partial class MainPageVM : ObservableRecipient
     }
 
     // Copied from GIMI-ModManager.WinUI/Services/UpdateChecker.cs
-    private const string ReleasesApiUrl = "https://api.github.com/repos/Jorixon/JASM/releases?per_page=2";
+    private const string ReleasesApiUrl = "https://api.github.com/repos/vagmr/JASM/releases?per_page=2";
 
     private async Task<ApiGitHubRelease?> GetLatestVersionAsync(CancellationToken cancellationToken)
     {

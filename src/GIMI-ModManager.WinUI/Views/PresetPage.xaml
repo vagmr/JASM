@@ -137,7 +137,7 @@
                             Visibility="{x:Bind ViewModel.ShowManualControls, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" />
 
                         <CheckBox
-                            Content="显示手动设置(不清楚是什么意思)"
+                            Content="显示手动设置"
                             IsChecked="{x:Bind ViewModel.ShowManualControls, Mode=TwoWay}"
                             ToolTipService.ToolTip="If you'd like to manually control setting preferences instead of letting JASM with the Elevator handle it for you" />
 

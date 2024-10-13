@@ -51,6 +51,11 @@ jobs:
         with:
           name: JASM_Regular
 
+      - name: 获取版本号
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+        shell: bash
+
       - name: 创建发布
         id: create_release
         uses: actions/create-release@v1
@@ -68,6 +73,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./JASM_v2.16.0.7z
-          asset_name: JASM_v2.16.0_20241003.7z
+          asset_path: ./JASM_v${{ steps.get_version.outputs.VERSION }}.7z
+          asset_name: JASM_v${{ steps.get_version.outputs.VERSION }}.7z
           asset_content_type: application/x-7z-compressed

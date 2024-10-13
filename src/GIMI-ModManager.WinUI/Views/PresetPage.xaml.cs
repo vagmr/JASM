@@ -61,7 +61,7 @@ public sealed partial class PresetPage : Page
                 Children =
                 {
                     CreateTextBlock(
-                        "预设是一个包含启用模组(Mods)及其设置的列表。JASM 在模组文件 .JASM_ModConfig.json 中读取和存储模组首选项。"),
+                        "预设是一个包含启用模组(Mods)及其设置的列表。JASM在模组.JASM_ModConfig.json中读取和存储模组首选项。"),
                     CreateTextBlock(
                         "当你创建一个新的预设时,JASM 会创建一个已启用模组的列表,以及存储在这些模组中的设置。因此,当您稍后应用该预设时,它将只启用这些模组,并应用预设中存储的设置"),
 
