@@ -242,7 +242,7 @@ public partial class ModInstallerVM : ObservableRecipient, INavigationAware, IDi
                     var fileSystemItem = RootFolder.FirstOrDefault()
                         ?.GetByPath(autoFoundImages.FirstOrDefault()?.LocalPath ?? "");
                     SetModPreviewImage(fileSystemItem);
-                    ImageSource = "Local image found in new Mod";
+                    ImageSource = "在模组文件夹中找到的本地图片";
                 });
 
             if (options?.ModUrl is not null)
@@ -451,7 +451,7 @@ public partial class ModInstallerVM : ObservableRecipient, INavigationAware, IDi
         }
 
         LastSelectedImageFile = fileSystemItem;
-        ImageSource = "Local image selected from new Mod";
+        ImageSource = "从新模组中选择的本地图片";
     }
 
     [RelayCommand]
