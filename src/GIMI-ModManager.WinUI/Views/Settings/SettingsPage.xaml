@@ -463,33 +463,29 @@
                         Text="版本更新日志"
                         Margin="0,24,0,12"/>
 
-                    <controls1:Expander Margin="0,0,0,16">
-                        <controls1:Expander.Header>
+                    <Expander Margin="0,0,0,16">
+                        <Expander.Header>
                             <TextBlock Text="Version 2.16.4" FontWeight="SemiBold"/>
-                        </controls1:Expander.Header>
-                        <controls1:Expander.Content>
+                        </Expander.Header>
+                        <Expander.Content>
                             <StackPanel Spacing="8">
                                 <TextBlock Text="依赖更新：" FontWeight="SemiBold"/>
-                                <BulletedList>
-                                    <ListItem>更新了 Runtime 至 1.61 版本。</ListItem>
-                                </BulletedList>
+                                <TextBlock Text="• 更新了 Runtime 至 1.61 版本。" Margin="16,0,0,0"/>
 
                                 <TextBlock Text="文本内容更新：" FontWeight="SemiBold" Margin="0,8,0,0"/>
-                                <BulletedList>
-                                    <ListItem>更新了 PresetPage.xaml 中的文本内容。</ListItem>
-                                    <ListItem>优化了 PresetPage.xaml.cs 中预设的描述。</ListItem>
-                                    <ListItem>修正了 SettingsPage.xaml 中的版本链接。</ListItem>
-                                    <ListItem>完成了对mod安装界面的本地化。</ListItem>
-                                    <ListItem>配置了滑翔伞和武器的图片。</ListItem>
-                                </BulletedList>
+                                <StackPanel Margin="16,0,0,0">
+                                    <TextBlock Text="• 更新了 PresetPage.xaml 中的文本内容。"/>
+                                    <TextBlock Text="• 优化了 PresetPage.xaml.cs 中预设的描述。"/>
+                                    <TextBlock Text="• 修正了 SettingsPage.xaml 中的版本链接。"/>
+                                    <TextBlock Text="• 完成了对mod安装界面的本地化。"/>
+                                    <TextBlock Text="• 配置了滑翔伞和武器的图片。"/>
+                                </StackPanel>
 
                                 <TextBlock Text="其他更新：" FontWeight="SemiBold" Margin="0,8,0,0"/>
-                                <BulletedList>
-                                    <ListItem>更新了项目版本号和发布链接。</ListItem>
-                                </BulletedList>
+                                <TextBlock Text="• 更新了项目版本号和发布链接。" Margin="16,0,0,0"/>
                             </StackPanel>
-                        </controls1:Expander.Content>
-                    </controls1:Expander>
+                        </Expander.Content>
+                    </Expander>
 
                     <StackPanel Margin="0,16,0,16" Orientation="Horizontal">
                         <Button
