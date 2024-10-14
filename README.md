@@ -1,4 +1,4 @@
-# JASM - 又一个皮肤管理器 (汉化版)
+# JASM (汉化版)
 
 这是JASM(Just Another Skin Manager)的汉化版本。JASM是一个使用WinUI 3和WinAppSDK开发的游戏皮肤管理器。
 

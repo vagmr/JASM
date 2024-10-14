@@ -1,4 +1,8 @@
-﻿using System.Diagnostics;
+﻿//ArchiveService.cs :
+/* 包含解压压缩包、计算文件MD5哈希值、比较两个哈希值是否相等、
+检查文件是否为压缩包、获取解压工具、提取压缩包中的文件、
+使用7zip解压压缩包等方法。 */
+using System.Diagnostics;
 using System.Security.Cryptography;
 using Serilog;
 using SharpCompress.Archives;
@@ -18,6 +22,7 @@ public class ArchiveService
         _extractTool = GetExtractTool();
     }
 
+    // 解压压缩包
     public DirectoryInfo ExtractArchive(string archivePath, string destinationPath, bool overwritePath = false)
     {
         var archive = new FileInfo(archivePath);
@@ -43,7 +48,7 @@ public class ArchiveService
         return new DirectoryInfo(extractedFolder);
     }
 
-    // https://stackoverflow.com/a/31349703
+    // 计算文件的MD5哈希值
     public async Task<string> CalculateFileMd5HashAsync(string filePath, CancellationToken cancellationToken = default)
     {
         var file = new FileInfo(filePath);
@@ -58,11 +63,13 @@ public class ArchiveService
         return convertedHash;
     }
 
+    // 比较两个哈希值是否相等
     public bool IsHashEqual(byte[] hash1, byte[] hash2)
     {
         return hash1.SequenceEqual(hash2);
     }
 
+    // 检查文件是否为压缩包
     private bool IsArchive(string path)
     {
         return Path.GetExtension(path) switch
@@ -74,6 +81,7 @@ public class ArchiveService
         };
     }
 
+    // 获取解压工具
     private Action<string, string>? Extractor(string archivePath)
     {
         Action<string, string>? action = null;
@@ -93,6 +101,7 @@ public class ArchiveService
         return action;
     }
 
+    // 提取压缩包中的文件
     private void ExtractEntries(IArchive archive, string extractPath)
     {
         _logger.Information("Extracting {ArchiveType} archive", archive.Type);
@@ -108,6 +117,7 @@ public class ArchiveService
         }
     }
 
+    // 使用SharpCompress库解压压缩包
     private void SharpExtract(string archivePath, string extractPath)
     {
         using var archive = ZipArchive.Open(archivePath);
@@ -122,6 +132,7 @@ public class ArchiveService
         System7Zip // 7zip installed on the system
     }
 
+    // 获取解压工具
     private ExtractTool GetExtractTool()
     {
         var bundled7ZFolder = Path.Combine(AppContext.BaseDirectory, @"Assets\7z\");
@@ -138,6 +149,7 @@ public class ArchiveService
     }
 
 
+    // 使用7zip解压压缩包
     private void Extract7Z(string archivePath, string extractPath)
     {
         var sevenZipPath = Path.Combine(AppContext.BaseDirectory, @"Assets\7z\7z.exe");

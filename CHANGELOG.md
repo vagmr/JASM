@@ -3,10 +3,6 @@
 ## [2.16.4](https://github.com/vagmr/JASM/compare/v2.16.3...v2.16.4) (2024-10-13)
 
 
-
-
-
-
 ## [2.16.0](https://github.com/Jorixon/JASM/compare/v2.15.0...v2.16.0) (2024-09-21)
 
 

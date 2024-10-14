@@ -9,63 +9,64 @@ using SharpCompress.Common;
 
 namespace GIMI_ModManager.Core.Services;
 
-// Extract process if archive file:
-// 1. Copy archive to work folder in windows temp folder
-// 2. Extract archive to windows temp folder
-// 3. Move extracted files to work folder
-// 4. Delete copied archive
-
+// 拖拽扫描器类，用于处理拖拽进来的文件或文件夹
 public sealed class DragAndDropScanner
 {
     private readonly ILogger _logger = Log.ForContext<DragAndDropScanner>();
-    private readonly string _tmpFolder = Path.Combine(Path.GetTempPath(), "JASM_TMP");
+    private readonly string _tmpFolder = Path.Combine(Path.GetTempPath(), "JASM_TMP"); // 临时文件夹路径
 
-    // Extracts files to this folder
+    // 工作文件夹路径，用于存放解压后的文件
     private string _workFolder = Path.Combine(Path.GetTempPath(), "JASM_TMP", Guid.NewGuid().ToString("N"));
 
-    private ExtractTool _extractTool;
+    private ExtractTool _extractTool; // 解压工具枚举
 
+    // 构造函数，初始化解压工具
     public DragAndDropScanner()
     {
         _extractTool = GetExtractTool();
     }
 
-    public DragAndDropScanResult ScanAndGetContents(string path)
+    // 扫描并获取内容
+    public async Task<DragAndDropScanResult> ScanAndGetContentsAsync(string path, Func<Task<string>> passwordPrompt)
     {
-        PrepareWorkFolder();
+        PrepareWorkFolder(); // 准备工作文件夹
 
-        _workFolder = Path.Combine(_workFolder, Path.GetFileName(path));
+        _workFolder = Path.Combine(_workFolder, Path.GetFileName(path)); // 设置工作文件夹路径
 
-        if (IsArchive(path))
+        if (IsArchive(path)) // 如果是压缩文件
         {
-            var copiedArchive = new FileInfo(path);
-            copiedArchive = copiedArchive.CopyTo(Path.Combine(_tmpFolder, Path.GetFileName(path)), true);
+            var copiedArchive = new FileInfo(path); // 获取文件信息
+            copiedArchive = copiedArchive.CopyTo(Path.Combine(_tmpFolder, Path.GetFileName(path)), true); // 复制到临时文件夹
 
-            var result = Extractor(copiedArchive.FullName);
+            var result = await ExtractorAsync(copiedArchive.FullName, passwordPrompt); // 获取解压方法
 
-            result?.Invoke(copiedArchive.FullName);
+            if (result != null)
+            {
+                await result.Invoke(copiedArchive.FullName); // 执行解压
+            }
         }
-        else if (Directory.Exists(path)) // ModDragAndDropService handles loose folders, but this added just in case 
+        else if (Directory.Exists(path)) // 如果是文件夹
         {
-            var modFolder = new Mod(new DirectoryInfo(path));
-            modFolder.CopyTo(_workFolder);
+            var modFolder = new Mod(new DirectoryInfo(path)); // 创建Mod对象
+            modFolder.CopyTo(_workFolder); // 复制到工作文件夹
         }
         else
-            throw new Exception("No valid mod folder or archive found");
+            throw new Exception("No valid mod folder or archive found"); // 如果不是有效的文件夹或压缩文件，抛出异常
 
-
-        return new DragAndDropScanResult()
+        return new DragAndDropScanResult() // 返回扫描结果
         {
-            ExtractedFolder = new Mod(new DirectoryInfo(_workFolder).Parent!)
+            ExtractedFolder = new Mod(new DirectoryInfo(_workFolder).Parent!) // 设置解压后的文件夹
         };
     }
 
+    // 准备工作文件夹
     private void PrepareWorkFolder()
     {
-        Directory.CreateDirectory(_tmpFolder);
-        Directory.CreateDirectory(_workFolder);
+        Directory.CreateDirectory(_tmpFolder); // 创建临时文件夹
+        Directory.CreateDirectory(_workFolder); // 创建工作文件夹
     }
 
+    // 判断是否是压缩文件
     private bool IsArchive(string path)
     {
         return Path.GetExtension(path) switch
@@ -77,32 +78,35 @@ public sealed class DragAndDropScanner
         };
     }
 
-    private Action<string>? Extractor(string path)
+    // 获取解压方法
+    private async Task<Func<string, Task>?> ExtractorAsync(string path, Func<Task<string>> passwordPrompt)
     {
-        Action<string>? action = null;
+        Func<string, Task>? action = null;
 
-        if (_extractTool == ExtractTool.Bundled7Zip)
-            action = Extract7Z;
-        else if (_extractTool == ExtractTool.SharpCompress)
+        if (_extractTool == ExtractTool.Bundled7Zip) // 如果使用内置7zip
+            action = async (p) => await Extract7ZAsync(p, passwordPrompt);
+        else if (_extractTool == ExtractTool.SharpCompress) // 如果使用SharpCompress库
             action = Path.GetExtension(path) switch
             {
-                ".zip" => SharpExtractZip,
-                ".rar" => SharpExtractRar,
-                ".7z" => SharpExtract7z,
+                ".zip" => async (p) => await SharpExtractZipAsync(p, passwordPrompt),
+                ".rar" => async (p) => await SharpExtractRarAsync(p, passwordPrompt),
+                ".7z" => async (p) => await SharpExtract7zAsync(p, passwordPrompt),
                 _ => null
             };
+        // 如果使用系统7zip，抛出未实现异常
         else if (_extractTool == ExtractTool.System7Zip) throw new NotImplementedException();
 
         return action;
     }
 
+    // 解压条目
     private void ExtractEntries(IArchive archive)
     {
-        _logger.Information("Extracting {ArchiveType} archive", archive.Type);
-        foreach (var entry in archive.Entries)
+        _logger.Information("Extracting {ArchiveType} archive", archive.Type); // 记录日志
+        foreach (var entry in archive.Entries) // 遍历压缩文件条目
         {
-            _logger.Debug("Extracting {EntryName}", entry.Key);
-            entry.WriteToDirectory(_workFolder, new ExtractionOptions()
+            _logger.Debug("Extracting {EntryName}", entry.Key); // 记录日志
+            entry.WriteToDirectory(_workFolder, new ExtractionOptions() // 解压到工作文件夹
             {
                 ExtractFullPath = true,
                 Overwrite = true,
@@ -111,34 +115,36 @@ public sealed class DragAndDropScanner
         }
     }
 
+    // 使用SharpCompress库解压Zip文件
     private void SharpExtractZip(string path)
     {
         using var archive = ZipArchive.Open(path);
         ExtractEntries(archive);
     }
 
-
+    // 使用SharpCompress库解压Rar文件
     private void SharpExtractRar(string path)
     {
         using var archive = RarArchive.Open(path);
         ExtractEntries(archive);
     }
 
-    // ReSharper disable once InconsistentNaming
+    // 使用SharpCompress库解压7z文件
     private void SharpExtract7z(string path)
     {
         using var archive = ArchiveFactory.Open(path);
         ExtractEntries(archive);
     }
 
-
+    // 解压工具枚举
     private enum ExtractTool
     {
-        Bundled7Zip, // 7zip bundled with JASM
-        SharpCompress, // SharpCompress library
-        System7Zip // 7zip installed on the system
+        Bundled7Zip, // 内置7zip
+        SharpCompress, // SharpCompress库
+        System7Zip // 系统7zip
     }
 
+    // 获取解压工具
     private ExtractTool GetExtractTool()
     {
         var bundled7ZFolder = Path.Combine(AppContext.BaseDirectory, @"Assets\7z\");
@@ -149,13 +155,12 @@ public sealed class DragAndDropScanner
             _logger.Debug("Using bundled 7zip");
             return ExtractTool.Bundled7Zip;
         }
-
         _logger.Information("Bundled 7zip not found, using SharpCompress library");
         return ExtractTool.SharpCompress;
     }
 
-
-    private void Extract7Z(string path)
+    // 使用内置7zip解压文件
+    private async Task Extract7ZAsync(string path, Func<Task<string>> passwordPrompt)
     {
         var sevenZipPath = Path.Combine(AppContext.BaseDirectory, @"Assets\7z\7z.exe");
         var process = new Process
@@ -165,18 +170,36 @@ public sealed class DragAndDropScanner
                 FileName = sevenZipPath,
                 Arguments = $"x \"{path}\" -o\"{_workFolder}\" -y",
                 UseShellExecute = false,
-                CreateNoWindow = true
+                CreateNoWindow = true,
+                RedirectStandardError = true,
+                RedirectStandardOutput = true
             }
         };
-        _logger.Information("Extracting 7z archive with command: {Command}", process.StartInfo.Arguments);
+
         process.Start();
-        process.WaitForExit();
+        var output = await process.StandardOutput.ReadToEndAsync();
+        var error = await process.StandardError.ReadToEndAsync();
+        await process.WaitForExitAsync();
+
+        if (output.Contains("Enter password") || error.Contains("Wrong password"))
+        {
+            var password = await passwordPrompt();
+            if (string.IsNullOrEmpty(password))
+                throw new OperationCanceledException("Password input was cancelled.");
+
+            process.StartInfo.Arguments = $"x \"{path}\" -o\"{_workFolder}\" -y -p{password}";
+            process.Start();
+            await process.WaitForExitAsync();
+        }
+
         _logger.Information("7z extraction finished with exit code {ExitCode}", process.ExitCode);
     }
+
 }
 
+// 拖拽扫描结果类
 public class DragAndDropScanResult
 {
-    public IMod ExtractedFolder { get; init; } = null!;
-    public string[] IgnoredMods { get; init; } = Array.Empty<string>();
+    public IMod ExtractedFolder { get; init; } = null!; // 解压后的文件夹
+    public string[] IgnoredMods { get; init; } = Array.Empty<string>(); // 被忽略的Mod列表
 }

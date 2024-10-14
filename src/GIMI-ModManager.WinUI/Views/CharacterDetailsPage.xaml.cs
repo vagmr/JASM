@@ -383,6 +383,8 @@ public sealed partial class CharacterDetailsPage : Page
         e.AcceptedOperation = DataPackageOperation.Copy;
     }
 
+    //执行解压操作
+    // TODO 解压加密压缩包
     private async void ModListArea_OnDrop(object sender, DragEventArgs e)
     {
         var deferral = e.GetDeferral();
@@ -609,5 +611,26 @@ public sealed partial class CharacterDetailsPage : Page
     {
         if (ViewModel.GoToGalleryScreenCommand.CanExecute(null))
             await ViewModel.GoToGalleryScreenCommand.ExecuteAsync(null);
+    }
+
+    private async Task<string> ShowPasswordPromptAsync()
+    {
+        var dialog = new ContentDialog
+        {
+            Title = "输入密码",
+            Content = new PasswordBox(),
+            PrimaryButtonText = "确定",
+            CloseButtonText = "取消",
+            DefaultButton = ContentDialogButton.Primary
+        };
+
+        var result = await dialog.ShowAsync();
+
+        if (result == ContentDialogResult.Primary)
+        {
+            return ((PasswordBox)dialog.Content).Password;
+        }
+
+        return string.Empty;
     }
 }
