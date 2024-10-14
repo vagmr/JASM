@@ -67,4 +67,6 @@ def generate_changelog(current_tag):
 if __name__ == "__main__":
     current_tag = sys.argv[1] if len(sys.argv) > 1 else "HEAD"
     changelog = generate_changelog(current_tag)
+    
+    sys.stdout.reconfigure(encoding='utf-8')
     print(changelog)

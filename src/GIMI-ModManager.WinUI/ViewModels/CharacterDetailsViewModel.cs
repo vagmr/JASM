@@ -28,6 +28,10 @@ using GIMI_ModManager.WinUI.ViewModels.CharacterGalleryViewModels;
 using GIMI_ModManager.WinUI.ViewModels.SubVms;
 using GIMI_ModManager.WinUI.Views;
 using Serilog;
+using SharpCompress.Archives;
+using SharpCompress.Common;
+using SharpCompress.Readers;
+using Microsoft.UI.Xaml.Controls;
 
 namespace GIMI_ModManager.WinUI.ViewModels;
 
@@ -71,6 +75,8 @@ public partial class CharacterDetailsViewModel : ObservableRecipient, INavigatio
 
     [ObservableProperty] private bool _isICharacter = false;
 
+    public IAsyncRelayCommand<(StorageFile, string)> DragAndDropEncryptedArchiveCommand { get; }
+
 
     public CharacterDetailsViewModel(IGameService gameService, ILogger logger,
         INavigationService navigationService, ISkinManagerService skinManagerService,
@@ -112,6 +118,8 @@ public partial class CharacterDetailsViewModel : ObservableRecipient, INavigatio
         ModPaneVM.UnloadMod();
 
         _modNotificationManager.OnModNotification += OnOnModNotificationHandler;
+
+        DragAndDropEncryptedArchiveCommand = new AsyncRelayCommand<(StorageFile, string)>(HandleEncryptedArchive);
     }
 
     private async void OnDragAndDropFinished(object? sender, ModDragAndDropService.DragAndDropFinishedArgs args)
@@ -763,5 +771,50 @@ public partial class CharacterDetailsViewModel : ObservableRecipient, INavigatio
         };
 
         return _modNotificationManager.AddModNotification(inMemoryModNotification);
+    }
+
+    private async Task HandleEncryptedArchive((StorageFile file, string password) param)
+    {
+        try
+        {
+            // 这里需要实现解压加密压缩包的逻辑
+            // 可以使用 SharpCompress 库来处理加密压缩包
+            using (var archive = ArchiveFactory.Open(param.file.Path, new ReaderOptions { Password = param.password }))
+            {
+                // 解压文件到临时目录
+                var tempPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+                Directory.CreateDirectory(tempPath);
+
+                foreach (var entry in archive.Entries.Where(entry => !entry.IsDirectory))
+                {
+                    entry.WriteToDirectory(tempPath, new ExtractionOptions { ExtractFullPath = true, Overwrite = true });
+                }
+
+                // 处理解压后的文件
+                await DragAndDropCommand.ExecuteAsync(new[] { await StorageFolder.GetFolderFromPathAsync(tempPath) });
+
+                // 清理临时目录
+                Directory.Delete(tempPath, true);
+            }
+        }
+        catch (Exception ex)
+        {
+            // 处理异常,例如密码错误
+            Log.Error(ex, "处理加密压缩包时发生错误");
+            // 显示错误消息给用户
+            await ShowErrorMessageAsync("无法解压加密压缩包。请确保密码正确。");
+        }
+    }
+
+    private async Task ShowErrorMessageAsync(string message)
+    {
+        var dialog = new ContentDialog
+        {
+            Title = "错误",
+            Content = message,
+            CloseButtonText = "确定"
+        };
+
+        await dialog.ShowAsync();
     }
 }

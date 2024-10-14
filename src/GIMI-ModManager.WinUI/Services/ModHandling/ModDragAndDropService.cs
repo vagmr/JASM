@@ -71,9 +71,8 @@ public class ModDragAndDropService
             if (storageItem is StorageFile)
             {
                 var scanner = new DragAndDropScanner();
-                var extractResult = await scanner.ScanAndGetContentsAsync(storageItem.Path,
-                    async () => await App.MainWindow.DispatcherQueue.EnqueueAsync(
-                        async () => await ((CharacterDetailsPage)App.MainWindow.Content).ShowPasswordPromptAsync()));
+                var extractResult = scanner.ScanAndGetContents(storageItem.Path);
+
 
                 await _modInstallerService.StartModInstallationAsync(
                     new DirectoryInfo(extractResult.ExtractedFolder.FullPath), modList);

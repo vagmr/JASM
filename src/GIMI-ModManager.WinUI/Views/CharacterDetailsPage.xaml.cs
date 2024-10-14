@@ -19,6 +19,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using Serilog;
+using GIMI_ModManager.Core.Services;
 
 namespace GIMI_ModManager.WinUI.Views;
 
@@ -383,15 +384,64 @@ public sealed partial class CharacterDetailsPage : Page
         e.AcceptedOperation = DataPackageOperation.Copy;
     }
 
-    //执行解压操作
-    // TODO 解压加密压缩包
     private async void ModListArea_OnDrop(object sender, DragEventArgs e)
     {
         var deferral = e.GetDeferral();
-        if (e.DataView.Contains(StandardDataFormats.StorageItems))
-            await ViewModel.DragAndDropCommand.ExecuteAsync(await e.DataView.GetStorageItemsAsync());
+        try
+        {
+            if (e.DataView.Contains(StandardDataFormats.StorageItems))
+            {
+                var items = await e.DataView.GetStorageItemsAsync();
+                foreach (var item in items)
+                {
+                    if (item is StorageFile file)
+                    {
+                        var scanner = new DragAndDropScanner();
+                        if (scanner.IsEncryptedArchive(file.Path))
+                        {
+                            var password = await ShowPasswordInputDialog();
+                            if (!string.IsNullOrEmpty(password))
+                            {
+                                await ViewModel.DragAndDropEncryptedArchiveCommand.ExecuteAsync((file, password));
+                            }
+                        }
+                        else
+                        {
+                            await ViewModel.DragAndDropCommand.ExecuteAsync(new[] { item });
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            // 处理异常
+            Log.Error(ex, "处理拖放操作时发生错误");
+        }
+        finally
+        {
+            deferral.Complete();
+        }
+    }
 
-        deferral.Complete();
+    private async Task<string> ShowPasswordInputDialog()
+    {
+        var dialog = new ContentDialog
+        {
+            Title = "加密压缩包",
+            PrimaryButtonText = "确定",
+            CloseButtonText = "取消",
+            DefaultButton = ContentDialogButton.Primary
+        };
+
+        var passwordBox = new PasswordBox();
+        var panel = new StackPanel();
+        panel.Children.Add(new TextBlock { Text = "请输入密码:" });
+        panel.Children.Add(passwordBox);
+        dialog.Content = panel;
+
+        var result = await dialog.ShowAsync();
+        return result == ContentDialogResult.Primary ? passwordBox.Password : string.Empty;
     }
 
     private void ModListGrid_OnCellEditEnded(object? sender, DataGridCellEditEndedEventArgs e)
@@ -611,26 +661,5 @@ public sealed partial class CharacterDetailsPage : Page
     {
         if (ViewModel.GoToGalleryScreenCommand.CanExecute(null))
             await ViewModel.GoToGalleryScreenCommand.ExecuteAsync(null);
-    }
-
-    private async Task<string> ShowPasswordPromptAsync()
-    {
-        var dialog = new ContentDialog
-        {
-            Title = "输入密码",
-            Content = new PasswordBox(),
-            PrimaryButtonText = "确定",
-            CloseButtonText = "取消",
-            DefaultButton = ContentDialogButton.Primary
-        };
-
-        var result = await dialog.ShowAsync();
-
-        if (result == ContentDialogResult.Primary)
-        {
-            return ((PasswordBox)dialog.Content).Password;
-        }
-
-        return string.Empty;
     }
 }
